@@ -1,0 +1,6 @@
+This project is an extension of HypnoTimeONE.  The application will be 
+enhanced with Accelerometer Features.
+---
+The initial features include:
+- Move the center of the HypnosisView relative to the angle the Phone is being tilted.
+- Add low-pass filter to reduce 'jerky' feeling when the phone is tilted.
