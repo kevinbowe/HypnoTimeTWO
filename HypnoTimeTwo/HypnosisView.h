@@ -10,6 +10,8 @@
 
 
 @interface HypnosisView : UIView {
+    
+    UIColor *stripeColor; // Add for Shake Detection...
     float xShift, yShift;
 }
 

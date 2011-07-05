@@ -11,6 +11,7 @@
 
 @implementation HypnosisViewController
 
+
 - (void) accelerometer:(UIAccelerometer *)meter didAccelerate:(UIAcceleration *)accel
 {
     //...NSLog(@"%f, %f, %f", [accel x], [accel y], [accel z]);    
@@ -42,6 +43,11 @@
     // Receive updates every 1/10th of a second...
     [a setUpdateInterval:0.1];
     [a setDelegate:self];
+    
+    /*
+     Add this for Shake Detection
+     */
+    [[self view] becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

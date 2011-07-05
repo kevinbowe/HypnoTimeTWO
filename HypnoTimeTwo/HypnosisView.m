@@ -12,6 +12,43 @@
 @implementation HypnosisView
 @synthesize xShift, yShift;
 
+/*
+ Add this method for Shake Detection
+ */
+- (BOOL) canBecomeFirstResponder
+{
+    return YES;
+}
+
+
+
+
+/*
+ Add this method to support Shake Detection.
+ */
+- (void) motionBegan:(UIEventSubtype)motion withEvent:(UIEvent *)event
+{
+    // Shake is the only kind of motion for now,
+    // but we should (for the future compatibility)
+    // check the motion type.
+    if (motion == UIEventSubtypeMotionShake)
+    {
+        NSLog(@"shake started...");
+        float r, g, b;
+        r = random() % 256 / 256.0;
+        g = random() % 256 / 256.0;
+        b = random() % 256 / 256.0;
+        
+        [stripeColor release];
+        stripeColor = [UIColor colorWithRed:r 
+                                      green:g 
+                                       blue:b 
+                                      alpha:1];
+        [stripeColor retain];
+        [self setNeedsDisplay];
+    }
+}
+
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,6 +56,17 @@
     if (self) {
         // Initialization code
     }
+    
+    /*
+     Add this block of code for Shake Detection
+     */
+    
+    // Notice we explicitly retain the UIColor instance
+    // returned by the convience method lightGrayColor,
+    // because it is autoreleased and we need to keep it around
+    // so we can use it in drawRect:.
+    stripeColor = [[UIColor lightGrayColor] retain];
+    
     return self;
 }
 
@@ -46,8 +94,16 @@
     // All lines will be drawn 10 points wide...
     CGContextSetLineWidth(context, 10);
     
+    /*
+     Add this code block to support Shake Detection.
+     */
+    
     // Set the stroke color to light gray...
-    [[UIColor lightGrayColor] setStroke];
+    [stripeColor setStroke];
+    
+//   Replaced with line above...
+//    // Set the stroke color to light gray...
+//    [[UIColor lightGrayColor] setStroke];
     
     // Draw concentric circles from the outside in...
     for (float currentRadius = maxRadius; currentRadius > 0; currentRadius -= 20)
@@ -95,6 +151,7 @@
 
 - (void)dealloc
 {
+    [stripeColor release];
     [super dealloc];
 }
 
