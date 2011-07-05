@@ -4,3 +4,8 @@ enhanced with Accelerometer Features.
 The initial features include:
 - Move the center of the HypnosisView relative to the angle the Phone is being tilted.
 - Add low-pass filter to reduce 'jerky' feeling when the phone is tilted.
+---
+July 6, 2011
+Updated application to support Shake detection.
+When the device is shaken the circular rings will change color.  Note that motion must completely
+STOP before an additional shake can trigger a color change.
